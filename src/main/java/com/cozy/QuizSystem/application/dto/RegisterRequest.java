@@ -4,6 +4,10 @@ import jakarta.validation.constraints.*;
 public class RegisterRequest {
 
     @NotBlank(message = "Phone is required")
+    @Pattern(
+            regexp = "^(\\+7|8|7|\\+8)[0-9]{10}$",
+            message = "Invalid phone format. Example: +77001234567 or 87001234567"
+    )
     private String phone;
 
     @NotBlank(message = "Role is required")
