@@ -37,6 +37,28 @@ public class UserRepositoryImpl implements UserRepository {
         return jpaRepository.existsByPhone(phone);
     }
 
+    @Override
+    public Optional<User> findById(Long id) {
+        return jpaRepository.findById(id)
+                .map(this::toDomain);
+    }
+
+    @Override
+    public User update(User user) {
+        UserEntity entity = jpaRepository.findById(user.getId())
+                .orElseThrow(() -> new RuntimeException("User not found"));
+
+        if (user.getFirstName() != null) entity.setFirstName(user.getFirstName());
+        if (user.getLastName() != null) entity.setLastName(user.getLastName());
+        if (user.getSecondName() != null) entity.setSecondName(user.getSecondName());
+        if (user.getEmail() != null) entity.setEmail(user.getEmail());
+        if (user.getPassword() != null) entity.setPassword(user.getPassword());
+
+        UserEntity saved = jpaRepository.save(entity);
+        return toDomain(saved);
+
+    }
+
     private UserEntity toEntity(User user) {
         UserEntity entity = new UserEntity();
         entity.setPhone(user.getPhone());

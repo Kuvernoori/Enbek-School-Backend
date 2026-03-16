@@ -8,4 +8,7 @@ public interface UserRepository {
     Optional<User> findByPhone (String phone);
     Optional<User> findByEmail(String email);
     boolean existsByPhone (String phone);
+
+    Optional<User> findById(Long id);
+    User update(User user);
 }

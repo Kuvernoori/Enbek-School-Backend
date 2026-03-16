@@ -1,16 +1,27 @@
 package com.cozy.QuizSystem.domain.model;
 
+import com.fasterxml.jackson.annotation.JsonAnyGetter;
+import lombok.*;
+
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+@ToString
+
 public class User {
-    private Long id;
-    private String phone;
-    private String role;
-    private String firstName;
-    private String lastName;
-    private String secondName;
-    private String email;
-    private String password;
+    Long id;
+    String phone;
+    String role;
+    String firstName;
+    String lastName;
+    LocalDate birthDate;
+    String secondName;
+    String email;
+    String password;
     LocalDateTime createdAt;
     LocalDateTime updatedAt;
 
