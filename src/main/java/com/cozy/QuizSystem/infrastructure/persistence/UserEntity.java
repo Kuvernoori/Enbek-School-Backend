@@ -34,7 +34,7 @@ public class UserEntity {
     private String SecondName;
 
     @Column(nullable = true)
-    LocalDate birthDate;
+    private LocalDate birthDate;
 
     @Column(nullable = true, unique = true)
     private String email;
