@@ -42,7 +42,6 @@ public class AdminController {
         adminService.changeRole(id, request.getRole());
         return ResponseEntity.ok().build();
     }
-    )
     @PatchMapping("/{id}/password")
     public ResponseEntity<Void> updatePassword(
             @PathVariable Long id,

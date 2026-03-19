@@ -9,4 +9,5 @@ public interface AdminService {
     UserResponse updateProfile(Long id, AdminUpdateProfileRequest request);
     void updatePassword(Long id, AdminUpdatePasswordRequest request);
     void deleteUser(Long id);
+    void changeRole(Long id, String role);
 }

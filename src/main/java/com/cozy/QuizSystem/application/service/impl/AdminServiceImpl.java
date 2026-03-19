@@ -24,6 +24,7 @@ public class AdminServiceImpl implements AdminService {
                 .map(this::toResponse)
                 .toList();
     }
+
     @Override
     public UserResponse getUserById(Long id) {
         User user = userRepository.findById(id)
@@ -32,7 +33,7 @@ public class AdminServiceImpl implements AdminService {
     }
 
     @Override
-    public UserResponse updateProfile(Long id, AdminUpdateProfileRequest request){
+    public UserResponse updateProfile(Long id, AdminUpdateProfileRequest request) {
         User existing = userRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("User not found"));
 
@@ -71,10 +72,34 @@ public class AdminServiceImpl implements AdminService {
                 .build();
         userRepository.update(updated);
     }
+
     @Override
-    public void deleteUser(Long id){
+    public void deleteUser(Long id) {
         userRepository.deleteById(id);
     }
+
+    @Override
+    public void changeRole(Long id, String role) {
+        User user = userRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+        String newRole = role.toUpperCase();
+        if (!newRole.equals("STUDENT") && !newRole.equals("ADMIN")) {
+            throw new RuntimeException("Invalid role, must be student or admin");
+        }
+
+    User updated = User.builder()
+            .id(user.getId())
+            .phone(user.getPhone())
+            .role(newRole)
+            .firstName(user.getFirstName())
+            .lastName(user.getLastName())
+            .secondName(user.getSecondName())
+            .email(user.getEmail())
+            .password(user.getPassword())
+            .createdAt(user.getCreatedAt())
+            .build();
+    userRepository.update(updated);
+}
     private UserResponse toResponse(User user){
         return new UserResponse(
                 user.getId(),

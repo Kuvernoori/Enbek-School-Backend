@@ -19,9 +19,6 @@ public class RegisterRequest {
     )
     String phone;
 
-    @NotBlank(message = "Role is required")
-    String role;
-
     @NotBlank(message = "First name is required")
     String firstName;
 
