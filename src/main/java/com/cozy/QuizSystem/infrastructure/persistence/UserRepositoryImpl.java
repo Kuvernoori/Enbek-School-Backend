@@ -2,6 +2,8 @@ package com.cozy.QuizSystem.infrastructure.persistence;
 import com.cozy.QuizSystem.domain.model.User;
 import com.cozy.QuizSystem.domain.repository.UserRepository;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 import java.util.Optional;
 
 
@@ -41,6 +43,20 @@ public class UserRepositoryImpl implements UserRepository {
     public Optional<User> findById(Long id) {
         return jpaRepository.findById(id)
                 .map(this::toDomain);
+    }
+    @Override
+    public List<User> findAll() {
+        return jpaRepository.findAll()
+                .stream()
+                .map(this::toDomain)
+                .toList();
+    }
+
+    @Override
+    public void deleteById(Long id) {
+        if (!jpaRepository.existsById(id)) {
+            throw new RuntimeException("User not found");
+        }
     }
 
     @Override
