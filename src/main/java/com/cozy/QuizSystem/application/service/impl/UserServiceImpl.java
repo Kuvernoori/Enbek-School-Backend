@@ -35,9 +35,12 @@ public class UserServiceImpl implements UserService {
                         ? request.getLastName() : existing.getLastName(),
                 request.getSecondName() != null
                         ? request.getSecondName() : existing.getSecondName(),
-                existing.getBirthDate(),
+                request.getBirthDate() != null
+                        ? request.getBirthDate() : existing.getBirthDate(),
                 request.getEmail() != null
                         ? request.getEmail() : existing.getEmail(),
+
+
                 existing.getPassword(),
                 existing.getCreatedAt(),
                 existing.getUpdatedAt()
